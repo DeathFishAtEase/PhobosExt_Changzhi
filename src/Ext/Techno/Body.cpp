@@ -6,7 +6,6 @@
 #include <JumpjetLocomotionClass.h>
 
 #include <Utilities/AresFunctions.h>
-
 TechnoExt::ExtContainer TechnoExt::ExtMap;
 
 TechnoExt::ExtData::~ExtData()
@@ -19,9 +18,10 @@ TechnoExt::ExtData::~ExtData()
 template <typename T>
 void TechnoExt::ExtData::Serialize(T& Stm)
 {
-	Stm
-		.Process(this->TypeExtData)
-		;
+}
+
+void TechnoExt::ExtData::InvalidatePointer(void* ptr, bool bRemoved)
+{
 }
 
 void TechnoExt::ExtData::LoadFromStream(PhobosStreamReader& Stm)

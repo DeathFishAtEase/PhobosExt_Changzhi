@@ -4,6 +4,9 @@
 
 #include <Ext/TAction/Body.h>
 #include <Ext/Techno/Body.h>
+#include <Ext/WarheadType/Body.h>
+
+#include <MyNew/WaypointLabelClass.h>
 
 #include <utility>
 
@@ -170,6 +173,8 @@ using PhobosTypeRegistry = TypeRegistry <
 	// Ext classes
 	TActionExt,
 	TechnoExt,
+	WarheadTypeExt,
+	WaypointLabelClass
 	// other classes
 > ;
 
