@@ -17,9 +17,6 @@ constexpr auto UISETTINGS_SECTION = "UISettings";
 class Phobos
 {
 public:
-	static void ExeRun();
-	static void ExeTerminate();
-
 	//variables
 	static HANDLE hInstance;
 
@@ -30,11 +27,8 @@ public:
 
 	static const wchar_t* VersionDescription;
 	static bool DisplayDamageNumbers;
-	static bool IsLoadingSaveGame;
 	static bool ShouldSave;
 	static std::wstring CustomGameSaveDescription;
-	static void ScheduleGameSave(const std::wstring& description);
-	static void PassiveSaveGame();
 
 	class Config
 	{

@@ -18,6 +18,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\CopyProtection.cpp" />
     <ClCompile Include="src\Ext\TAction\Body.cpp" />
     <ClCompile Include="src\Ext\TAction\Hooks.cpp" />
     <ClCompile Include="src\Ext\Techno\Body.cpp" />
@@ -32,7 +33,6 @@
     <ClCompile Include="src\Ext\WarheadType\Body.cpp" />
     <ClCompile Include="src\Phobos.CRT.cpp" />
     <ClCompile Include="src\Phobos.Ext.cpp" />
-    <ClCompile Include="src\Phobos.Save.cpp" />
     <ClCompile Include="src\Phobos.cpp" />
     <ClCompile Include="src\Utilities\ShapeTextPrinter.cpp" />
     <ClCompile Include="src\Utilities\SpawnerHelper.cpp" />
@@ -41,7 +41,6 @@
     <ClCompile Include="src\Utilities\GeneralUtils.cpp" />
     <ClCompile Include="src\Utilities\Patch.cpp" />
     <ClCompile Include="YRpp\StaticInits.cpp" />
-    <ClCompile Include="YRpp\SyringeEx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Commands\NextTeam.h" />
