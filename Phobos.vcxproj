@@ -25,6 +25,7 @@
     <ClCompile Include="src\Ext\Techno\Body.cpp" />
     <ClCompile Include="src\Ext\Techno\Hooks.cpp" />
     <ClCompile Include="src\Ext\Techno\Hooks.Firing.cpp" />
+    <ClCompile Include="src\Ext\Techno\MyNew\AutoHunt.cpp" />
     <ClCompile Include="src\Ext\Techno\MyNew\TemporalExclusive.cpp" />
     <ClCompile Include="src\Ext\Techno\WeaponHelpers.cpp" />
     <ClCompile Include="src\Misc\Hooks.Ares.cpp" />
@@ -50,6 +51,7 @@
     <ClInclude Include="src\Commands\NextTeam.h" />
     <ClInclude Include="src\Ext\TAction\Body.h" />
     <ClInclude Include="src\Ext\TechnoType\Body.h" />
+    <ClInclude Include="src\Ext\Techno\MyNew\AutoHunt.h" />
     <ClInclude Include="src\Ext\Techno\MyNew\TemporalExclusive.h" />
     <ClInclude Include="src\MyNew\WaypointLabelClass.h" />
     <ClInclude Include="src\Utilities\Anchor.h" />
