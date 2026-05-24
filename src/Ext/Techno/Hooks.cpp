@@ -10,17 +10,26 @@ DEFINE_JUMP(VTABLE, 0x7E3F40, 0x459EE0) // BuildingClass_GetTechnoType -> Buildi
 DEFINE_JUMP(VTABLE, 0x7EB0DC, 0x51FAF0) // InfantryClass_GetTechnoType -> InfantryClass_GetType
 DEFINE_JUMP(VTABLE, 0x7F5CF4, 0x741490) // UnitClass_GetTechnoType -> UnitClass_GetType
 
-// Early, before ObjectClass_AI
+// 修改 TechnoClass_AI 钩子
 DEFINE_HOOK(0x6F9E50, TechnoClass_AI, 0x5)
 {
 	GET(TechnoClass*, pThis, ECX);
-	// Debug::Log("[%s] TechnoClass_AI\n", pThis->GetType()->ID);
 
 	// AutoHunt
-    AutoHunt(pThis);
+	static unsigned int s_nFrameCounter = 0;
+	s_nFrameCounter++;
+
+	const unsigned int AUTO_HUNT_INTERVAL = 15; // 每15帧执行一次
+
+	if (s_nFrameCounter % AUTO_HUNT_INTERVAL == 0)
+	{
+		// AutoHunt
+		AutoHunt(pThis);
+	}
 
 	// Temporal exclusive
 	HandleTemporalExclusiveTargeting(pThis);
+
 	return 0;
 }
 
