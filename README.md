@@ -18,7 +18,7 @@
 ---
 
 ### 已知问题  
-当单位当前正在使用带有`TemporalExclusive=yes`的武器时, 会强制改变单位的索敌逻辑, 可能会产生bug
+当单位当前正在使用带有`TemporalExclusive=yes`弹头的武器时, 会强制改变单位的索敌逻辑, 可能会产生bug
 
 ---
 
@@ -67,6 +67,17 @@ TemporalExclusive=              ; boolean（布尔值），默认 false
 普通的超时空武器（`Temporal=yes` 但未设置 `TemporalExclusive`）仍可以攻击已被互斥武器锁定的单位。
 
 互斥武器不能攻击被普通超时空武器冻结的目标。
+
+### 3. 自动游猎
+```ini
+[TechnoType]
+AutoHunt=                       ; boolean（布尔值），默认 false
+```
+当科技类型设置`AutoHunt=yes` 时，该类型的所有单位在游戏中会自动强制进入 Hunt 状态,  
+主动搜索并攻击敌方目标，且不受玩家直接操控。  
+（即玩家无法通过鼠标点击控制该单位的移动、攻击等行为）  
+
+<span style="color: gray;">当玩家操控时可以用Phobos的`Convert.ComputerToHuman=`变形成换皮单位来避免强制索敌。</span>
 
 ---
 
