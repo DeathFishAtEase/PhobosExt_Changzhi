@@ -2,6 +2,7 @@
 
 #include <TechnoClass.h>
 #include <FootClass.h>
+#include <TeamClass.h>
 
 #include <Ext\TechnoType\Body.h>
 
@@ -23,6 +24,10 @@ void UpdateAutoHunt(FootClass* pThis)
 		pThis->Owner ? pThis->Owner->get_ID() : "null");
 
 		// 禁止招募
+		if (pThis->Team)
+		{
+			pThis->Team->LiberateMember(pThis);
+		}
 		if (pThis->RecruitableA) pThis->RecruitableA = false;
 		if (pThis->RecruitableB) pThis->RecruitableB = false;
 
