@@ -10,18 +10,28 @@ DEFINE_JUMP(VTABLE, 0x7E3F40, 0x459EE0) // BuildingClass_GetTechnoType -> Buildi
 DEFINE_JUMP(VTABLE, 0x7EB0DC, 0x51FAF0) // InfantryClass_GetTechnoType -> InfantryClass_GetType
 DEFINE_JUMP(VTABLE, 0x7F5CF4, 0x741490) // UnitClass_GetTechnoType -> UnitClass_GetType
 
-// 修改 TechnoClass_AI 钩子
+// Early, before ObjectClass_AI
 DEFINE_HOOK(0x6F9E50, TechnoClass_AI, 0x5)
 {
 	GET(TechnoClass*, pThis, ECX);
 
-	// AutoHunt
-	// 可能会造成游戏卡顿
-	UpdateAutoHunt(pThis);
 
 	// Temporal exclusive
 	HandleTemporalExclusiveTargeting(pThis);
 
 	return 0;
 }
+
+// After TechnoClass_AI
+DEFINE_HOOK(0x4DA54E, FootClass_AI, 0x6)
+{
+	GET(FootClass*, pThis, ESI);
+
+	// auto const pExt = TechnoExt::ExtMap.Find(pThis);
+
+	// AutoHunt
+	UpdateAutoHunt(pThis);
+	return 0;
+}
+
 

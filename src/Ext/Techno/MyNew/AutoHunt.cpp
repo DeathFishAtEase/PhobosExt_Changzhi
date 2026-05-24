@@ -5,7 +5,7 @@
 
 #include <Ext\TechnoType\Body.h>
 
-void UpdateAutoHunt(TechnoClass* pThis)
+void UpdateAutoHunt(FootClass* pThis)
 {
 	if (!pThis) return;
 	if (pThis->Transporter) return;
@@ -21,8 +21,6 @@ void UpdateAutoHunt(TechnoClass* pThis)
 		Debug::Log("[AutoHunt] Processing unit: %s, Owner: %s\n",
 		pThis->GetType()->ID,
 		pThis->Owner ? pThis->Owner->get_ID() : "null");
-
-		Mission curMission = pThis->GetCurrentMission();
 
 		// 禁止招募
 		if (pThis->RecruitableA) pThis->RecruitableA = false;
