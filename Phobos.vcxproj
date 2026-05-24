@@ -21,6 +21,7 @@
     <ClCompile Include="src\CopyProtection.cpp" />
     <ClCompile Include="src\Ext\TAction\Body.cpp" />
     <ClCompile Include="src\Ext\TAction\Hooks.cpp" />
+    <ClCompile Include="src\Ext\TechnoType\Body.cpp" />
     <ClCompile Include="src\Ext\Techno\Body.cpp" />
     <ClCompile Include="src\Ext\Techno\Hooks.cpp" />
     <ClCompile Include="src\Ext\Techno\Hooks.Firing.cpp" />
@@ -48,6 +49,7 @@
   <ItemGroup>
     <ClInclude Include="src\Commands\NextTeam.h" />
     <ClInclude Include="src\Ext\TAction\Body.h" />
+    <ClInclude Include="src\Ext\TechnoType\Body.h" />
     <ClInclude Include="src\Ext\Techno\MyNew\TemporalExclusive.h" />
     <ClInclude Include="src\MyNew\WaypointLabelClass.h" />
     <ClInclude Include="src\Utilities\Anchor.h" />
