@@ -26,7 +26,8 @@
 [*Ares*](https://github.com/Ares-Developers/Ares) 项目组  
 [*Phobos*](https://github.com/Phobos-developers/Phobos) 项目组  
 偏微whyffu [*@B站主页*](https://space.bilibili.com/41073096)  
-韩大妈 [*@B站主页*](https://space.bilibili.com/2229647)
+韩大妈 [*@B站主页*](https://space.bilibili.com/2229647)  
+妖妖酱 [*@GitHub*](https://github.com/yaoyaojiang)
 
 <span style="color: gray;">排名不分先后</span>
 
@@ -56,7 +57,8 @@
 
 ### 2. 动态标签绑定功能
 
-允许将游戏中的单位（小队成员、特定科技类型）与触发器标签（Tag）动态关联，便于后续通过触发器执行逻辑。
+允许将游戏中的单位（小队成员、特定科技类型）与标签（Tag）动态关联，便于后续通过触发器执行逻辑。  
+若标签（Tag）不存在/已销毁，则会根据标签类型（TagType）创建一个新标签（Tag），确保目标会与标签关联。  
 
 **触发动作说明**：
 - `553` – 将指定小队全部成员关联到指定标签...（参数：小队索引，标签索引）
@@ -111,10 +113,10 @@ AutoHunt=                       ; boolean（布尔值），默认 false
 550=在指定路径点绘制文本... (PhobosExt by Chang_zhi),-4,13,30,6,6,6,0,0,0,在指定路径点绘制文本。\n第三个数值是宽度(像素，1~1000，默认250)。\n第四个数值是背景不透明度(百分比，0~100)。\n第五个数值是颜色(金=0，白=1，红=2，蓝=3，绿=4，黄=5，紫=6，粉=7，淡蓝=8),0,1,902,1
 551=清除指定路径点的文本... (PhobosExt by Chang_zhi),0,0,30,0,0,0,0,0,0,清除指定路径点的文本。,0,1,903,1
 552=清除所有路径点文本... (PhobosExt by Chang_zhi),0,0,0,0,0,0,0,0,0,清除屏幕上所有已设置的路径点文本。,0,1,904,1
-553=将指定小队全部成员关联到指定标签... (PhobosExt by Chang_zhi),0,0,7,38,0,0,0,0,0,将指定小队内所有成员关联到指定标签。,0,1,553,1
-554=将指定所属方的指定小队全部成员关联到指定标签... (PhobosExt by Chang_zhi),0,0,7,38,2,0,0,0,0,将指定所属方下的指定小队所有成员关联到指定标签。,0,1,554,1
-555=将特定科技类型全部关联到指定标签... (PhobosExt by Chang_zhi),-4,46,38,0,0,0,0,0,0,将指定科技类型的所有实例关联到指定标签。,0,1,555,1
-556=将指定所属方的特定科技类型全部关联到指定标签... (PhobosExt by Chang_zhi),-4,46,38,2,0,0,0,0,0,将指定所属方下指定科技类型的所有实例关联到指定标签。,0,1,556,1
+553=将指定小队全部成员关联到指定标签... (PhobosExt by Chang_zhi),0,0,7,38,0,0,0,0,0,将指定小队内所有成员关联到指定标签。若标签（Tag）不存在/已销毁，则会根据标签类型（TagType）创建一个新标签（Tag），确保目标会与标签关联。,0,1,553,1
+554=将指定所属方的指定小队全部成员关联到指定标签... (PhobosExt by Chang_zhi),0,0,7,38,2,0,0,0,0,将指定所属方下的指定小队所有成员关联到指定标签。若标签（Tag）不存在/已销毁，则会根据标签类型（TagType）创建一个新标签（Tag），确保目标会与标签关联。,0,1,554,1
+555=将特定科技类型全部关联到指定标签... (PhobosExt by Chang_zhi),-4,46,38,0,0,0,0,0,0,将指定科技类型的所有实例关联到指定标签。若标签（Tag）不存在/已销毁，则会根据标签类型（TagType）创建一个新标签（Tag），确保目标会与标签关联。,0,1,555,1
+556=将指定所属方的特定科技类型全部关联到指定标签... (PhobosExt by Chang_zhi),-4,46,38,2,0,0,0,0,0,将指定所属方下指定科技类型的所有实例关联到指定标签。若标签（Tag）不存在/已销毁，则会根据标签类型（TagType）创建一个新标签（Tag），确保目标会与标签关联。,0,1,556,1
 ...
 ```
 
@@ -128,22 +130,24 @@ AutoHunt=                       ; boolean（布尔值），默认 false
 550=Draw Text at Specified Waypoint... (PhobosExt by Chang_zhi),-4,13,30,6,6,6,0,0,0,Draw text at the specified waypoint.\nThe third value is the width in pixels (1~1000，default: 250).\nThe fourth value is the background opacity percentage (0~100).\nThe fifth value is the color (Gold=0，White=1，Red=2，Blue=3，Green=4，Yellow=5，Purple=6，Pink=7，Light Blue=8),0,1,902,1
 551=Clear Text at Specified Waypoint... (PhobosExt by Chang_zhi),0,0,30,0,0,0,0,0,0,Clear the text at the specified waypoint.,0,1,903,1
 552=Clear All Waypoint Texts... (PhobosExt by Chang_zhi),0,0,0,0,0,0,0,0,0,Clear all waypoint texts displayed on screen.,0,1,904,1
-553=Associates all members of the specified team to the specified tag... (PhobosExt by Chang_zhi),0,0,7,38,0,0,0,0,0,Associates all members of the specified team to the tag of the specified index.,0,1,553,1
-554=Associates all members of the specified team under the specified owner to the specified tag... (PhobosExt by Chang_zhi),0,0,7,38,2,0,0,0,0,Associates all members of the specified team under the specified owner to the specified tag.,0,1,554,1
-555=Associates all instances of the specified techno type to the specified tag... (PhobosExt by Chang_zhi),-4,46,38,0,0,0,0,0,0,Associates all instances of the specified techno type to the specified tag.,0,1,555,1
-556=Associates all instances of the specified techno type under the specified owner to the specified tag... (PhobosExt by Chang_zhi),-4,46,38,2,0,0,0,0,0,Associates all instances of the specified techno type under the specified owner to the specified tag.,0,1,556,1
+553=Associate all members of the specified team to the specified tag... (PhobosExt by Chang_zhi),0,0,7,38,0,0,0,0,0,Associate all members within the specified team to the specified tag. If the tag does not exist or has been destroyed，a new tag will be created according to the tag type (TagType) to ensure the target is associated with the tag.,0,1,553,1
+554=Associate all members of the specified team under the specified owner to the specified tag... (PhobosExt by Chang_zhi),0,0,7,38,2,0,0,0,0,Associate all members of the specified team under the specified owner to the specified tag. If the tag does not exist or has been destroyed，a new tag will be created according to the tag type (TagType) to ensure the target is associated with the tag.,0,1,554,1
+555=Associate all instances of the specified technotype to the specified tag... (PhobosExt by Chang_zhi),-4,46,38,0,0,0,0,0,0,Associate all instances of the specified technotype to the specified tag. If the tag does not exist or has been destroyed，a new tag will be created according to the tag type (TagType) to ensure the target is associated with the tag.,0,1,555,1
+556=Associate all instances of the specified technotype under the specified owner to the specified tag... (PhobosExt by Chang_zhi),-4,46,38,2,0,0,0,0,0,Associate all instances of the specified technotype under the specified owner to the specified tag. If the tag does not exist or has been destroyed，a new tag will be created according to the tag type (TagType) to ensure the target is associated with the tag.,0,1,556,1
 ...
 ```
+
 在 `[Chinese-ActionsRA2]` 小节中中添加:
+
 ```ini
 [Chinese-ActionsRA2]
 ...
 550=在指定路径点绘制文本... (PhobosExt by Chang_zhi),-4,13,30,6,6,6,0,0,0,在指定路径点绘制文本。\n第三个数值是宽度(像素，1~1000，默认250)。\n第四个数值是背景不透明度(百分比，0~100)。\n第五个数值是颜色(金=0，白=1，红=2，蓝=3，绿=4，黄=5，紫=6，粉=7，淡蓝=8),0,1,902,1
 551=清除指定路径点的文本... (PhobosExt by Chang_zhi),0,0,30,0,0,0,0,0,0,清除指定路径点的文本。,0,1,903,1
 552=清除所有路径点文本... (PhobosExt by Chang_zhi),0,0,0,0,0,0,0,0,0,清除屏幕上所有已设置的路径点文本。,0,1,904,1
-553=将指定小队全部成员关联到指定标签... (PhobosExt by Chang_zhi),0,0,7,38,0,0,0,0,0,将指定小队内所有成员关联到指定标签。,0,1,553,1
-554=将指定所属方的指定小队全部成员关联到指定标签... (PhobosExt by Chang_zhi),0,0,7,38,2,0,0,0,0,将指定所属方下的指定小队所有成员关联到指定标签。,0,1,554,1
-555=将特定科技类型全部关联到指定标签... (PhobosExt by Chang_zhi),-4,46,38,0,0,0,0,0,0,将指定科技类型的所有实例关联到指定标签。,0,1,555,1
-556=将指定所属方的特定科技类型全部关联到指定标签... (PhobosExt by Chang_zhi),-4,46,38,2,0,0,0,0,0,将指定所属方下指定科技类型的所有实例关联到指定标签。,0,1,556,1
+553=将指定小队全部成员关联到指定标签... (PhobosExt by Chang_zhi),0,0,7,38,0,0,0,0,0,将指定小队内所有成员关联到指定标签。若标签（Tag）不存在/已销毁，则会根据标签类型（TagType）创建一个新标签（Tag），确保目标会与标签关联。,0,1,553,1
+554=将指定所属方的指定小队全部成员关联到指定标签... (PhobosExt by Chang_zhi),0,0,7,38,2,0,0,0,0,将指定所属方下的指定小队所有成员关联到指定标签。若标签（Tag）不存在/已销毁，则会根据标签类型（TagType）创建一个新标签（Tag），确保目标会与标签关联。,0,1,554,1
+555=将特定科技类型全部关联到指定标签... (PhobosExt by Chang_zhi),-4,46,38,0,0,0,0,0,0,将指定科技类型的所有实例关联到指定标签。若标签（Tag）不存在/已销毁，则会根据标签类型（TagType）创建一个新标签（Tag），确保目标会与标签关联。,0,1,555,1
+556=将指定所属方的特定科技类型全部关联到指定标签... (PhobosExt by Chang_zhi),-4,46,38,2,0,0,0,0,0,将指定所属方下指定科技类型的所有实例关联到指定标签。若标签（Tag）不存在/已销毁，则会根据标签类型（TagType）创建一个新标签（Tag），确保目标会与标签关联。,0,1,556,1
 ...
 ```
