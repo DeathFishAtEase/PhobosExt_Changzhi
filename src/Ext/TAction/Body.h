@@ -11,9 +11,23 @@ class HouseClass;
 
 enum class PhobosTriggerAction : unsigned int
 {
+	// 在指定路径点绘制文本...
 	SetWaypointLabel = 550,
+
+	// 清除指定路径点的文本...
 	ClearWaypointLabel = 551,
+
+	// 清除所有路径点文本... 
 	ClearAllWaypointLabels = 552,
+
+	// 将指定小队全部成员关联到指定标签... (by yaoyaojiang)
+	BindAllTeamMemberToTag = 553,
+
+	// 将特定科技类型全部关联到指定标签...
+	BindAllTechnoTypeToTag = 554,
+
+	// 将所属方的特定科技类型全部关联到指定标签...
+	BindOwnerTechnoTypeToTag = 555
 };
 
 class TActionExt
@@ -52,6 +66,9 @@ public:
 	ACTION_FUNC(SetWaypointLabel);
 	ACTION_FUNC(ClearWaypointLabel);
 	ACTION_FUNC(ClearAllWaypointLabels);
+	ACTION_FUNC(BindAllTeamMemberToTag);
+	ACTION_FUNC(BindAllTechnoTypeToTag);
+	ACTION_FUNC(BindOwnerTechnoTypeToTag);
 
 #undef ACTION_FUNC
 #pragma pop_macro("ACTION_FUNC")
