@@ -168,6 +168,7 @@ bool TActionExt::BindAllTechnoTypeToTag(TActionClass* pThis, HouseClass* pHouse,
 	Debug::Log("[TActionExt::BindAllTechnoTypeToTag] Techno: \"%s\", Tag: \"%d\"\n", techno, tagIndex);
 
 	TagClass* pTagClass = nullptr;
+	// 先尝试在 TagClass 中获取 pTagClass
 	for (auto const pTag : TagClass::Array_Logic_House)
 	{
 		Debug::Log("[TActionExt::BindAllTechnoTypeToTag] get Tag is \"%s\" \n", pTag->Type->get_ID());
@@ -177,36 +178,29 @@ bool TActionExt::BindAllTechnoTypeToTag(TActionClass* pThis, HouseClass* pHouse,
 			break;
 		}
 	}
-	Debug::Log("[TActionExt::BindAllTechnoTypeToTag] foreach Array_Logic_House end\n");
-	if(!pTagClass)
-		for (auto const pTag : TagClass::Array_Logic)
+	// 获取失败, 尝试根据 TagTypeClass 创建一个 TagClass
+	if (!pTagClass) Debug::Log("[TActionExt::BindAllTechnoTypeToTag] Failed to get pTagClass by TagClass::Array\n");
+
+	Debug::Log("[TActionExt::BindAllTechnoTypeToTag] Try to Create a TayClass instance\n");
+	for (auto pTagType : TagTypeClass::Array)
+	{
+		Debug::Log("[TActionExt::BindAllTechnoTypeToTag] TagTypeClass check \"%s\"\n", pTagType->get_ID());
+		if (pTagType->get_ID() == ("0" + std::to_string(tagIndex)))
 		{
-			Debug::Log("[TActionExt::BindAllTechnoTypeToTag] get Tag is \"%s\" \n", pTag->Type->get_ID());
-			if (pTag->Type && pTag->Type->get_ID() == ("0" + std::to_string(tagIndex)))
-			{
-				pTagClass = pTag;
-				break;
-			}
+			pTagClass = TagClass::GetInstance(pTagType);
+			Debug::Log("[TActionExt::BindAllTechnoTypeToTag] successful create a TagClass instance by TagTypeClass\n");
+			break;
 		}
-		Debug::Log("[TActionExt::BindAllTechnoTypeToTag] foreach Array_Logic end\n");
-	if(!pTagClass)
-		for (auto const pTag : TagClass::Array_unknown)
-		{
-			Debug::Log("[TActionExt::BindAllTechnoTypeToTag] get Tag is \"%s\" \n", pTag->Type->get_ID());
-			if (pTag->Type && pTag->Type->get_ID() == ("0" + std::to_string(tagIndex)))
-			{
-				pTagClass = pTag;
-				break;
-			}
-		}
-		Debug::Log("[TActionExt::BindAllTechnoTypeToTag] foreach Array_unknown end\n");
+	}
+
+	// 都没有, 确实找不到了, 返回 false
 	if (!pTagClass)
 	{
-        Debug::Log("[TActionExt::BindAllTechnoTypeToTag] Failed to get targetTagClass\n");
+		Debug::Log("[TActionExt::BindAllTechnoTypeToTag] Failed to create a TagClass instance. return false\n");
 		return false;
 	}
 
-	Debug::Log("[TActionExt::BindAllTechnoTypeToTag] successful get targerTagClass %s\n", pTagClass->Type->get_ID());
+	Debug::Log("[TActionExt::BindAllTechnoTypeToTag] successful get pTagClass %s\n", pTagClass->Type->get_ID());
 
 	for (auto const pTechno : TechnoClass::Array)
 	{
@@ -220,7 +214,6 @@ bool TActionExt::BindAllTechnoTypeToTag(TActionClass* pThis, HouseClass* pHouse,
 	}
 
 	Debug::Log("[TActionExt::BindAllTechnoTypeToTag] End\n");
-
 	return true;
 }
 
