@@ -164,16 +164,15 @@ bool TActionExt::BindAllTechnoTypeToTag(TActionClass* pThis, HouseClass* pHouse,
 	const char* techno = pThis->Text;
 	int tagIndex = pThis->Param3;
 
-	Debug::Log("[TActionExt::BindAllTechnoTypeToTag] Techno: %s, Tag: %d\n", techno, tagIndex);
+	Debug::Log("[TActionExt::BindAllTechnoTypeToTag] Techno: \"%s\", Tag: \"%d\"\n", techno, tagIndex);
 
 	TagClass* pTagClass = nullptr;
 	for (auto const pTag : TagClass::Array)
 	{
-		Debug::Log("[TActionExt::BindAllTechnoTypeToTag] get Tag is %s\n", pTag->Type->get_ID());
-		if (pTag->Type && std::stoi(pTag->Type->get_ID()) == tagIndex)
+		Debug::Log("[TActionExt::BindAllTechnoTypeToTag] get Tag is \"%s\" \n", pTag->Type->get_ID());
+		if (pTag->Type && pTag->Type->get_ID() == ("0" + std::to_string(tagIndex)))
 		{
 			pTagClass = pTag;
-			Debug::Log("[TActionExt::BindAllTechnoTypeToTag] successful get targerTagClass %s\n", pTagClass->Type->get_ID());
 			break;
 		}
 	}
@@ -183,15 +182,16 @@ bool TActionExt::BindAllTechnoTypeToTag(TActionClass* pThis, HouseClass* pHouse,
 
 	for (auto const pTechno : TechnoClass::Array)
 	{
-		Debug::Log("[TActionExt::BindAllTechnoTypeToTag] check %s\n", pTechno);
-		if (pTechno->get_ID() == techno)
+		Debug::Log("[TActionExt::BindAllTechnoTypeToTag] check \"%s\"\n", pTechno->get_ID());
+		if (pTechno->get_ID() == std::string(techno))
 		{
+			Debug::Log("[TActionExt::BindAllTechnoTypeToTag] try bind \"%s\" to tag \"%s\"\n", pTechno->get_ID(), pTagClass->Type->get_ID());
 			pTechno->AttachTrigger(pTagClass);
-			Debug::Log("[TActionExt::BindAllTechnoTypeToTag] bind %s to tag %s\n", pTechno, pTagClass->Type->get_ID());
+			Debug::Log("[TActionExt::BindAllTechnoTypeToTag] successful bind \"%s\" to tag \"%s\"\n", pTechno->get_ID(), pTagClass->Type->get_ID());
 		}
 	}
 
-	Debug::Log("[TActionExt::BindAllTechnoTypeToTag] successful bind all techno type to tag\n");
+	Debug::Log("[TActionExt::BindAllTechnoTypeToTag] End\n");
 
 	return true;
 }
