@@ -46,8 +46,8 @@ int TEventExt::GetFlags(int iEvent)
 	// 0x10 : In LogicClass. borrowed from 0x684DCA.
 	switch (static_cast<PhobosTriggerEvent>(iEvent))
 	{
-	case PhobosTriggerEvent::TechnoDestroyedByHouse:
-		return 0;
+	//case PhobosTriggerEvent::TechnoDestroyedByHouse:
+	//	return 0;
 	//case
 	//	return 0x4;
 	//case
@@ -107,9 +107,7 @@ bool TEventExt::TechnoTypeOfHouseNearWaypoint(TEventClass* pThis, ObjectClass* p
 
 bool TEventExt::TechnoDestroyedByHouse(TEventClass* pThis, ObjectClass* pAttached)
 {
-
 	// 大败而归
-
 	return false;
 }
 
