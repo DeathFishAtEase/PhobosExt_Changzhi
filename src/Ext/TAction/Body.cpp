@@ -70,6 +70,12 @@ bool TActionExt::Execute(TActionClass* pThis, HouseClass* pHouse, ObjectClass* p
 		return TActionExt::BindAllTechnoTypeToTag(pThis, pHouse, pObject, pTrigger, location);
 	case PhobosTriggerAction::BindOwnerTechnoTypeToTag:
 		return TActionExt::BindOwnerTechnoTypeToTag(pThis, pHouse, pObject, pTrigger, location);
+	case PhobosTriggerAction::GiveHouseMoney:
+		return TActionExt::GiveHouseMoney(pThis, pHouse, pObject, pTrigger, location);
+	case PhobosTriggerAction::TakeHouseMoney:
+		return TActionExt::TakeHouseMoney(pThis, pHouse, pObject, pTrigger, location);
+	case PhobosTriggerAction::SetHouseMoney:
+		return TActionExt::SetHouseMoney(pThis, pHouse, pObject, pTrigger, location);
 
 	default:
 		bHandled = false;
@@ -243,6 +249,59 @@ bool TActionExt::BindOwnerTechnoTypeToTag(TActionClass* pThis, HouseClass* pHous
 
 	return true;
 }
+
+bool TActionExt::GiveHouseMoney(TActionClass* pThis, HouseClass* pHouse, ObjectClass* pObject, TriggerClass* pTrigger, CellStruct const& location)
+{
+	int houseIndex = pThis->Param3;
+	int moneyAmount = pThis->Param4;
+
+	HouseClass* pOwner = HouseClass::FindByCountryIndex(houseIndex);
+	if (!pOwner) return false;
+	if (moneyAmount < 0) return false;
+
+	pOwner->GiveMoney(moneyAmount);
+
+	return true;
+}
+
+bool TActionExt::TakeHouseMoney(TActionClass* pThis, HouseClass* pHouse, ObjectClass* pObject, TriggerClass* pTrigger, CellStruct const& location)
+{
+	int houseIndex = pThis->Param3;
+	int moneyAmount = pThis->Param4;
+
+	HouseClass* pOwner = HouseClass::FindByCountryIndex(houseIndex);
+	if (!pOwner) return false;
+	if (moneyAmount < 0) return false;
+
+	long availableMoney = pOwner->Available_Money();
+
+	if(availableMoney >= moneyAmount)
+	{
+		pOwner->TakeMoney(moneyAmount);
+	}
+	else // not enough money, take all remaining money
+	{
+		pOwner->TakeMoney(availableMoney);
+	}
+
+	return true;
+}
+
+bool TActionExt::SetHouseMoney(TActionClass* pThis, HouseClass* pHouse, ObjectClass* pObject, TriggerClass* pTrigger, CellStruct const& location)
+{
+	int houseIndex = pThis->Param3;
+	int moneyAmount = pThis->Param4;
+
+	HouseClass* pOwner = HouseClass::FindByCountryIndex(houseIndex);
+	if (!pOwner) return false;
+	if (moneyAmount < 0) return false;
+
+	pOwner->TakeMoney(pOwner->Available_Money());
+	pOwner->GiveMoney(moneyAmount);
+
+	return true;
+}
+
 
 // =============================
 // container

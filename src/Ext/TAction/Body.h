@@ -30,7 +30,17 @@ enum class PhobosTriggerAction : unsigned int
 	BindAllTechnoTypeToTag = 555,
 
 	// 将指定所属方的特定科技类型全部关联到指定标签...
-	BindOwnerTechnoTypeToTag = 556
+	BindOwnerTechnoTypeToTag = 556,
+
+	// 为指定所属方添加金钱数额...
+	GiveHouseMoney = 557,
+
+	// 为向指定所属方扣除金钱数额...
+	TakeHouseMoney = 558,
+	
+	// 设置指定所属方的金钱数额...
+	SetHouseMoney = 559,
+
 };
 
 class TActionExt
@@ -73,6 +83,9 @@ public:
 	ACTION_FUNC(BindOwnerTeamMemberToTag);
 	ACTION_FUNC(BindAllTechnoTypeToTag);
 	ACTION_FUNC(BindOwnerTechnoTypeToTag);
+	ACTION_FUNC(GiveHouseMoney);
+	ACTION_FUNC(TakeHouseMoney);
+	ACTION_FUNC(SetHouseMoney);
 
 #undef ACTION_FUNC
 #pragma pop_macro("ACTION_FUNC")
