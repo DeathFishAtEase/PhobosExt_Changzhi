@@ -83,6 +83,8 @@ bool TActionExt::Execute(TActionClass* pThis, HouseClass* pHouse, ObjectClass* p
 		return TActionExt::RemoveAllBaseNodeForHouseAtWaypoint(pThis, pHouse, pObject, pTrigger, location);
 	case PhobosTriggerAction::RemoveBaseNodesOfBuildingTypeForHouse:
 		return TActionExt::RemoveBaseNodesOfBuildingTypeForHouse(pThis, pHouse, pObject, pTrigger, location);
+	case PhobosTriggerAction::DestroyTagSafely:
+		return TActionExt::DestroyTagSafely(pThis, pHouse, pObject, pTrigger, location);
 
 	default:
 		bHandled = false;
@@ -501,6 +503,25 @@ bool TActionExt::RemoveBaseNodesOfBuildingTypeForHouse(TActionClass* pThis, Hous
 	Debug::Log("[Inter]: New base nodes count = %d\n", pOwner->Base.BaseNodes.Count);
 
 	Debug::Log("[End]: Finished removing base nodes for building type \"%s\".\n", buildTypeID);
+	return true;
+}
+
+bool TActionExt::DestroyTagSafely(TActionClass* pThis, HouseClass* pHouse, ObjectClass* pObject, TriggerClass* pTrigger, CellStruct const& location)
+{
+	int tagIndex = pThis->Param3;
+
+	// 因为没有标签会尝试创建一个, 所以不会崩溃(大概)
+	TagClass* pTagClass = GetTagClassByIndex(tagIndex);
+
+	for (auto pTechno : TechnoClass::Array)
+	{
+		if (pTechno->AttachedTag && pTechno->AttachedTag->Type == pTagClass->Type)
+		{
+			pTechno->AttachedTag->Destroy();
+		}
+	}
+
+	pTagClass->Destroy();
 	return true;
 }
 

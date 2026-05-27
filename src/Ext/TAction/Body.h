@@ -48,7 +48,10 @@ enum class PhobosTriggerAction : unsigned int
 	RemoveAllBaseNodeForHouseAtWaypoint = 561,
 
 	// 移除指定所属方的指定建筑类型的所有基地节点...
-	RemoveBaseNodesOfBuildingTypeForHouse = 562
+	RemoveBaseNodesOfBuildingTypeForHouse = 562,
+
+	// 安全地销毁标签...
+	DestroyTagSafely,
 
 };
 
@@ -98,6 +101,7 @@ public:
 	ACTION_FUNC(AddBaseNodeForHouseAtWaypoint);
 	ACTION_FUNC(RemoveAllBaseNodeForHouseAtWaypoint);
 	ACTION_FUNC(RemoveBaseNodesOfBuildingTypeForHouse);
+	ACTION_FUNC(DestroyTagSafely);
 
 #undef ACTION_FUNC
 #pragma pop_macro("ACTION_FUNC")
