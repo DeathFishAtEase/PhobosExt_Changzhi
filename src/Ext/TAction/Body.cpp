@@ -85,6 +85,10 @@ bool TActionExt::Execute(TActionClass* pThis, HouseClass* pHouse, ObjectClass* p
 		return TActionExt::RemoveBaseNodesOfBuildingTypeForHouse(pThis, pHouse, pObject, pTrigger, location);
 	case PhobosTriggerAction::DestroyTagSafely:
 		return TActionExt::DestroyTagSafely(pThis, pHouse, pObject, pTrigger, location);
+	case PhobosTriggerAction::BindTagToTechnoTypeAtWaypoint:
+		return TActionExt::BindTagToTechnoTypeAtWaypoint(pThis, pHouse, pObject, pTrigger, location);
+	case PhobosTriggerAction::BindTagToTechnoTypeOfHouseAtWaypoint:
+		return TActionExt::BindTagToTechnoTypeOfHouseAtWaypoint(pThis, pHouse, pObject, pTrigger, location);
 
 	default:
 		bHandled = false;
@@ -522,6 +526,92 @@ bool TActionExt::DestroyTagSafely(TActionClass* pThis, HouseClass* pHouse, Objec
 	}
 
 	pTagClass->Destroy();
+	return true;
+}
+
+bool TActionExt::BindTagToTechnoTypeAtWaypoint(TActionClass* pThis, HouseClass* pHouse, ObjectClass* pObject, TriggerClass* pTrigger, CellStruct const& location)
+{
+	const char* techno = pThis->Text;
+	int tagIndex = pThis->Param3;
+	const int waypointIndex = pThis->Param4;
+	// int houseIndex = pThis->Param5;
+
+	TagClass* pTagClass = GetTagClassByIndex(tagIndex);
+	if (!pTagClass) return false;
+
+	CellStruct cell = ScenarioClass::Instance->GetWaypointCoords(waypointIndex);
+	if (cell.X < 0 || cell.Y < 0) return false;
+
+	// HouseClass* pOwner = HouseClass::FindByCountryIndex(houseIndex);
+	// if (!pOwner) return false;
+
+	// 遍历 TechnoClass, 尝试把 TagClass 绑定到 TechnoClass 上
+	for (auto const pTechno : TechnoClass::Array)
+	{
+		if (pTechno && pTechno->get_ID() == std::string(techno))
+		{
+			if (BuildingClass* pBuilding = abstract_cast<BuildingClass*>(pTechno))
+			{
+				if(IsCellInBuildingFoundation(pBuilding, cell))
+				{
+					if (pBuilding->AttachedTag) pBuilding->ReplaceTag(pTagClass);
+					else pBuilding->AttachTrigger(pTagClass);
+				}	
+			}
+			else
+			{
+				if (CellClass::Coord2Cell(pTechno->GetCoords()) == cell) // 不是建筑类型, 直接判断坐标即可
+				{
+					if (pBuilding->AttachedTag) pBuilding->ReplaceTag(pTagClass);
+					else pBuilding->AttachTrigger(pTagClass);
+				}
+			}
+		}
+	}
+
+	return true;
+}
+
+bool TActionExt::BindTagToTechnoTypeOfHouseAtWaypoint(TActionClass* pThis, HouseClass* pHouse, ObjectClass* pObject, TriggerClass* pTrigger, CellStruct const& location)
+{
+	const char* techno = pThis->Text;
+	int tagIndex = pThis->Param3;
+	const int waypointIndex = pThis->Param4;
+	int houseIndex = pThis->Param5;
+
+	TagClass* pTagClass = GetTagClassByIndex(tagIndex);
+	if (!pTagClass) return false;
+
+	CellStruct cell = ScenarioClass::Instance->GetWaypointCoords(waypointIndex);
+	if (cell.X < 0 || cell.Y < 0) return false;
+
+	HouseClass* pOwner = HouseClass::FindByCountryIndex(houseIndex);
+	if (!pOwner) return false;
+
+	// 遍历 TechnoClass, 尝试把 TagClass 绑定到 TechnoClass 上
+	for (auto const pTechno : TechnoClass::Array)
+	{
+		if (pTechno && pTechno->get_ID() == std::string(techno) && pTechno->Owner == pOwner)
+		{
+			if (BuildingClass* pBuilding = abstract_cast<BuildingClass*>(pTechno))
+			{
+				if (IsCellInBuildingFoundation(pBuilding, cell))
+				{
+					if (pBuilding->AttachedTag) pBuilding->ReplaceTag(pTagClass);
+					else pBuilding->AttachTrigger(pTagClass);
+				}
+			}
+			else
+			{
+				if (CellClass::Coord2Cell(pTechno->GetCoords()) == cell) // 不是建筑类型, 直接判断坐标即可
+				{
+					if (pBuilding->AttachedTag) pBuilding->ReplaceTag(pTagClass);
+					else pBuilding->AttachTrigger(pTagClass);
+				}
+			}
+		}
+	}
+
 	return true;
 }
 
