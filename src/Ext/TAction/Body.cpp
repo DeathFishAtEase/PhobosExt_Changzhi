@@ -14,6 +14,7 @@
 
 #include <MyNew/WaypointLabelClass.h>
 
+#include <set>
 #include <vector>
 #include <string>
 
@@ -99,6 +100,8 @@ bool TActionExt::Execute(TActionClass* pThis, HouseClass* pHouse, ObjectClass* p
 		return TActionExt::BindTagToAllTechnoTypesOfSpecificOwnerWithinWaypointRange(pThis, pHouse, pObject, pTrigger, location);
 
 
+	//case PhobosTriggerAction::RemoveBaseNodesExceedingAttemptCountForHouse:
+	//	return TActionExt::RemoveBaseNodesExceedingAttemptCountForHouse(pThis, pHouse, pObject, pTrigger, location);
 	//case PhobosTriggerAction::SetObjectRecruitable:
 	//	return TActionExt::SetObjectRecruitable(pThis, pHouse, pObject, pTrigger, location);
 
@@ -731,7 +734,6 @@ bool TActionExt::BindTagToSpecificTechnoTypeOfSpecificOwnerWithinWaypointRange(T
 	if (pTagClass->InstanceCount == 0) pTagClass->Destroy();
 	return true;
 }
-
 
 bool TActionExt::BindTagToAllTechnoTypesWithinWaypointRange(TActionClass* pThis, HouseClass* pHouse, ObjectClass* pObject, TriggerClass* pTrigger, CellStruct const& location)
 {
