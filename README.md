@@ -1,9 +1,9 @@
 # [PhobosExt](https://github.com/Chang-zhi/PhobosExt_Changzhi)
 
 一个扩展《红色警戒2：尤里的复仇》游戏功能的 DLL，基于 Phobos 开发，作者[*Chang_zhi*](https://space.bilibili.com/423792550)。  
-可以自由的将其用于任务包或模组制作。
+主要面向 任务/地图 作者，可以自由的将其用于任务包或模组制作。
 
-**运行时不依赖 Ares 或 Phobos ，但仍建议其一同使用。**
+**尽管叫 PhobosExt , 但不依赖 Ares 或 Phobos，可独立运行。推荐和其一同使用。**
 
 说是基于 Phobos，其实只是删了删代码 (  
 <span style="color: gray;">低创作品，大佬轻喷。</span>
@@ -127,7 +127,7 @@ ShowWaypointLabelInShroud=              ; boolean（布尔值），默认 true
 > - **范围**：整数，以单元格为单位的圆形半径 。
 > - **布尔值**：`0` 或 `1`，控制是否强制创建一个新的标签实例。（见下文注意事项第9条）
 
-#### 重要注意事项
+#### 注意事项
 
 1. 使用本组触发时，会更新指定标签的 `InstanceCount`（引用计数）。  
 2. 由本组触发创建的标签可以被原版动作 `70`（摧毁标签... ）安全销毁而不会弹框。  
@@ -191,8 +191,8 @@ ShowWaypointLabelInShroud=              ; boolean（布尔值），默认 true
 
 **注意事项：**
 
-只会修改 `FootClass` 的实例  
-两个布尔值，分别对应 `RecruitableA` 和 `RecruitableB。`  
+只会修改 `FootClass` 的实例。  
+两个布尔值，分别对应 `RecruitableA` 和 `RecruitableB`
 
 ---
 
@@ -251,15 +251,15 @@ LegalTargetWhenAIOwner=                       ; boolean（布尔值），默认 
 
 ---
 
-### [*FA2SP_HDM_Edition*](https://github.com/handama/FA2sp)（韩大妈版本）
+### [FA2SP_HDM_Edition](https://github.com/handama/FA2sp)（韩大妈版本）
 可以直接复制压缩包里面的 `FAData_TriggerAndScript.ini` 到地编的根目录下。  
 否则需手动同时编辑 `FAData_TriggerAndScript.ini` 中的   
  `[Chinese-EventsRA2]`, `[English-EventsRA2]`, `[Chinese-ActionsRA2]`, `[English-ActionsRA2]` 小节。
 
-在 `[Chinese-EventsRA2]` 和 `[English-ActionsRA2]` 中添加以下内容:
+在 `[Chinese-EventsRA2]` 和 `[English-EventsRA2]` 中添加以下内容:
 
 ```ini
-[Chinese-EventsRA2]/[English-ActionsRA2]
+[Chinese-EventsRA2]/[English-EventsRA2]
 ...
 550=路径点附近存在所属方的任意科技类型... (PhobosExt),48,30,0,0,当指定路径点的指定距离内存在触发所属方任意科技类型时，此事件被满足。,0,1,550,1
 551=路径点附近不存在所属方的任意科技类型... (PhobosExt),48,30,0,0,当指定路径点的指定距离内不存在触发所属方任意科技类型时，此事件被满足。,0,1,551,1
