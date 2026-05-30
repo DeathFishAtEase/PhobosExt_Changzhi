@@ -77,6 +77,9 @@ enum class PhobosTriggerAction : unsigned int
 	// 设置关联单位单位的可招募属性... 
 	SetRecruitableForFoot = 571,
 
+	// 设置关联单位单位的跟随者索引... 
+	SetFollowsIndexForVehicle = 572,
+
 	// 清除指定所属方尝试次数超过指定数值的基地节点...
 	//RemoveBaseNodesExceedingAttemptCountForHouse = 570,
 	// 设置关联单位单位的可招募属性...
@@ -140,6 +143,7 @@ public:
 	ACTION_FUNC(BindTagToAllTechnoTypesOfSpecificOwnerWithinWaypointRange);
 	ACTION_FUNC(UnifyAllInstancesOfSameTagType);
 	ACTION_FUNC(SetRecruitableForFoot);
+	ACTION_FUNC(SetFollowsIndexForVehicle);
 
 
 	// ACTION_FUNC(RemoveBaseNodesExceedingAttemptCountForHouse);
